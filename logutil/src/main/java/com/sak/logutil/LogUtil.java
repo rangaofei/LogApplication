@@ -153,19 +153,44 @@ public class LogUtil {
         if (!outputRect) {
             return stackInfo.append(msg).toString();
         } else {
-            for (int i = 0; i < msg.length() + 2; i++) {
-                stackInfo.append('-');
-            }
-            stackInfo.append("\n ");
-            stackInfo.append('|');
-            stackInfo.append(msg);
-            stackInfo.append('|');
-            stackInfo.append("\n");
-            for (int i = 0; i < msg.length() + 2; i++) {
-                stackInfo.append('-');
-            }
-            return stackInfo.toString();
+            StringBuilder result = new StringBuilder(stackInfo);
+            addHeader(result, msg.length());
+            addPreChar(result, stackInfo.length());
+            result.append(msg);
+            addAfterChar(result);
+            addFooter(result, msg.length(), stackInfo.length());
+            return result.toString();
         }
+    }
 
+    private static void addHeader(StringBuilder result, int length) {
+        result.append('+');
+        for (int i = 0; i < length + 4; i++) {
+            result.append('-');
+        }
+        result.append('+');
+        result.append("\n");
+    }
+
+    private static void addPreChar(StringBuilder result, int length) {
+        for (int i = 0; i < length; i++) {
+            result.append(" ");
+        }
+        result.append("|  ");
+    }
+
+    private static void addAfterChar(StringBuilder result) {
+        result.append("  |\n");
+    }
+
+    private static void addFooter(StringBuilder result, int length, int l) {
+        for (int i = 0; i < l; i++) {
+            result.append(" ");
+        }
+        result.append('+');
+        for (int i = 0; i < length + 4; i++) {
+            result.append('-');
+        }
+        result.append('+');
     }
 }
