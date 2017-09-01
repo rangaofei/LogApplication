@@ -5,16 +5,20 @@ public class LogUtil {
     private static String TAG = "saka";
     private static boolean isDebug;
 
-    private LogUtil(String TAG, boolean isDebug) {
+    public LogUtil(String TAG, boolean isDebug) {
         LogUtil.TAG = TAG;
         LogUtil.isDebug = isDebug;
     }
 
-    /**
+    public static void init(String TAG, boolean isDebug) {
+        LogUtil.TAG = TAG;
+        LogUtil.isDebug = isDebug;
+    }/*
      * Send a VERBOSE log message.
      *
      * @param msg The message you would like logged.
      */
+
     public static void v(String msg) {
         if (isDebug)
             android.util.Log.v(TAG, buildMessage(msg));
