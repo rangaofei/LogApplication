@@ -3,16 +3,25 @@ package com.sak.logutil;
 
 public class LogUtil {
     private static String TAG = "saka";
-    private static boolean isDebug;
+    private static boolean isDebug = BuildConfig.DEBUG;
+    private static boolean outputStackInfo = true;
+    private static boolean outputRect = false;
 
     public LogUtil(String TAG, boolean isDebug) {
         LogUtil.TAG = TAG;
         LogUtil.isDebug = isDebug;
     }
 
-    public static void init(String TAG, boolean isDebug) {
-        LogUtil.TAG = TAG;
-        LogUtil.isDebug = isDebug;
+    public static void setOutputRect(boolean outputRect) {
+        LogUtil.outputRect = outputRect;
+    }
+
+    public static void setOutputStackInfo(boolean outputStackInfo) {
+        LogUtil.outputStackInfo = outputStackInfo;
+    }
+
+    public static LogUtil init(String TAG, boolean isDebug) {
+        return new LogUtil(TAG, isDebug);
     }/*
      * Send a VERBOSE log message.
      *
@@ -136,8 +145,27 @@ public class LogUtil {
      * @return Message String
      */
     protected static String buildMessage(String msg) {
+        if (!outputStackInfo) {
+            return msg;
+        }
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
+        StringBuilder stackInfo = new StringBuilder().append(caller.getClassName()).append(".").append(caller.getMethodName()).append("(): ");
+        if (!outputRect) {
+            return stackInfo.append(msg).toString();
+        } else {
+            for (int i = 0; i < msg.length() + 2; i++) {
+                stackInfo.append('-');
+            }
+            stackInfo.append("\n ");
+            stackInfo.append('|');
+            stackInfo.append(msg);
+            stackInfo.append('|');
+            stackInfo.append("\n");
+            for (int i = 0; i < msg.length() + 2; i++) {
+                stackInfo.append('-');
+            }
+            return stackInfo.toString();
+        }
 
-        return new StringBuilder().append(caller.getClassName()).append(".").append(caller.getMethodName()).append("(): ").append(msg).toString();
     }
 }

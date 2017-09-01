@@ -23,4 +23,12 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.sak.logutil.test", appContext.getPackageName());
     }
+
+    @Test
+    public void testLog() {
+        LogUtil.init("123", true);
+        LogUtil.setOutputStackInfo(true);
+        LogUtil.setOutputRect(true);
+        LogUtil.d("12345456");
+    }
 }
