@@ -1,6 +1,8 @@
 package com.sak.logutil;
 
 
+import com.saka.logutil.BuildConfig;
+
 public class LogUtil {
     private static String TAG = "saka";
     private static boolean isDebug = BuildConfig.DEBUG;
