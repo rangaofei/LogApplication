@@ -20,7 +20,6 @@ public class OutputRectStrategy {
 
     public void setStackInfo(StringBuilder stackInfo) {
         this.stackInfo = stackInfo;
-
     }
 
     public String printMessage() {

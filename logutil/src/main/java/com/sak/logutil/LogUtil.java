@@ -142,9 +142,15 @@ public class LogUtil {
     private static String buildMessage(String msg) {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         StringBuilder stackInfo = new StringBuilder().append(caller.getClassName()).append(".").append(caller.getMethodName()).append("(): ");
-        OutputRectStrategy rectStrategy = new OutputRectStrategy(msg, outputStackInfo);
-        rectStrategy.setStackInfo(stackInfo);
-        return rectStrategy.printMessage();
+        if (outputRect) {
+            OutputRectStrategy rectStrategy = new OutputRectStrategy(msg, outputStackInfo);
+            rectStrategy.setStackInfo(stackInfo);
+            return rectStrategy.printMessage();
+        } else {
+            NoRectStrategy noRectStrategy = new NoRectStrategy(msg, outputStackInfo);
+            noRectStrategy.setStackInfo(stackInfo);
+            return noRectStrategy.printMessage();
+        }
     }
 
 }

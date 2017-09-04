@@ -7,7 +7,7 @@ import com.saka.logutil.BuildConfig;
  */
 
 public class LogConfig {
-    private String TAG = "saka";
+    private String TAG = BuildConfig.APPLICATION_ID;
     private boolean isDebug = BuildConfig.DEBUG;
     private boolean outputStackInfo = true;
     private boolean outputRect = false;
