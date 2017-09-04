@@ -16,6 +16,7 @@ allprojects {
 1. 是否输出日志(默认在debug输出，release不输出)
 2. 是否输出边框(默认不输出)
 3. 是否输出栈信息(默认输出)
+4. 设置输出标签(默认是包名)
 ```
 LogConfig logConfig = new LogConfig.Builder()
                 .isDebug(true)
@@ -25,3 +26,7 @@ LogConfig logConfig = new LogConfig.Builder()
 ```
 4.应用配置
 `LogUtil.init(logConfig);`
+然后就可以输出日志了。
+
+这里有一个小技巧可以自定义是否输出日志
+在buildConfig文件中可以根据当前打包版本（debug还是release）来设置是否输出日志
