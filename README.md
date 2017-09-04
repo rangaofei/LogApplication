@@ -9,7 +9,7 @@ allprojects {
 	}
 ```
 2.在module级别build.gradle添加依赖
-`compile 'com.github.rgf456:LogApplication:1.0.5'`
+`compile 'com.github.rgf456:LogApplication:1.0.6'`
 
 3.初始化配置
 目前支持的配置包括：
