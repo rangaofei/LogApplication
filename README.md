@@ -30,3 +30,5 @@ LogConfig logConfig = new LogConfig.Builder()
 
 这里有一个小技巧可以自定义是否输出日志
 在buildConfig文件中可以根据当前打包版本（debug还是release）来设置是否输出日志
+
+![](https://github.com/rgf456/LogApplication/blob/master/Thumb/1.png)
