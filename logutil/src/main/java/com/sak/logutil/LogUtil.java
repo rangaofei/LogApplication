@@ -4,27 +4,20 @@ package com.sak.logutil;
 import com.saka.logutil.BuildConfig;
 
 public class LogUtil {
+
     private static String TAG = "saka";
     private static boolean isDebug = BuildConfig.DEBUG;
     private static boolean outputStackInfo = true;
     private static boolean outputRect = false;
 
-    public LogUtil(String TAG, boolean isDebug) {
-        LogUtil.TAG = TAG;
-        LogUtil.isDebug = isDebug;
-    }
 
-    public static void setOutputRect(boolean outputRect) {
-        LogUtil.outputRect = outputRect;
+    public static void init(LogConfig logConfig) {
+        TAG = logConfig.getTAG();
+        isDebug = logConfig.isDebug();
+        outputStackInfo = logConfig.isOutputStackInfo();
+        outputRect = logConfig.isOutputRect();
     }
-
-    public static void setOutputStackInfo(boolean outputStackInfo) {
-        LogUtil.outputStackInfo = outputStackInfo;
-    }
-
-    public static LogUtil init(String TAG, boolean isDebug) {
-        return new LogUtil(TAG, isDebug);
-    }/*
+    /*
      * Send a VERBOSE log message.
      *
      * @param msg The message you would like logged.
@@ -146,53 +139,12 @@ public class LogUtil {
      * @param msg The message you would like logged.
      * @return Message String
      */
-    protected static String buildMessage(String msg) {
-        if (!outputStackInfo) {
-            return msg;
-        }
+    private static String buildMessage(String msg) {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         StringBuilder stackInfo = new StringBuilder().append(caller.getClassName()).append(".").append(caller.getMethodName()).append("(): ");
-        if (!outputRect) {
-            return stackInfo.append(msg).toString();
-        } else {
-            StringBuilder result = new StringBuilder(stackInfo);
-            addHeader(result, msg.length());
-            addPreChar(result, stackInfo.length());
-            result.append(msg);
-            addAfterChar(result);
-            addFooter(result, msg.length(), stackInfo.length());
-            return result.toString();
-        }
+        OutputRectStrategy rectStrategy = new OutputRectStrategy(msg, outputStackInfo);
+        rectStrategy.setStackInfo(stackInfo);
+        return rectStrategy.printMessage();
     }
 
-    private static void addHeader(StringBuilder result, int length) {
-        result.append('+');
-        for (int i = 0; i < length + 4; i++) {
-            result.append('-');
-        }
-        result.append('+');
-        result.append("\n");
-    }
-
-    private static void addPreChar(StringBuilder result, int length) {
-        for (int i = 0; i < length; i++) {
-            result.append(" ");
-        }
-        result.append("|  ");
-    }
-
-    private static void addAfterChar(StringBuilder result) {
-        result.append("  |\n");
-    }
-
-    private static void addFooter(StringBuilder result, int length, int l) {
-        for (int i = 0; i < l; i++) {
-            result.append(" ");
-        }
-        result.append('+');
-        for (int i = 0; i < length + 4; i++) {
-            result.append('-');
-        }
-        result.append('+');
-    }
 }
