@@ -9,6 +9,7 @@ public class LogUtil {
     private static boolean isDebug = BuildConfig.DEBUG;
     private static boolean outputStackInfo = true;
     private static boolean outputRect = false;
+    private OutPutMessage outPutMessage;
 
 
     public static void init(LogConfig logConfig) {
@@ -133,6 +134,14 @@ public class LogUtil {
             android.util.Log.e(TAG, buildMessage(msg), thr);
     }
 
+    public static void object(Object o){
+        if(isDebug){
+            AnnotationUtil annotationUtil=new AnnotationUtil();
+
+            android.util.Log.d(TAG,annotationUtil.getA(o));
+        }
+    }
+
     /**
      * Building Message
      *
@@ -142,15 +151,13 @@ public class LogUtil {
     private static String buildMessage(String msg) {
         StackTraceElement caller = new Throwable().fillInStackTrace().getStackTrace()[2];
         StringBuilder stackInfo = new StringBuilder().append(caller.getClassName()).append(".").append(caller.getMethodName()).append("(): ");
-        if (outputRect) {
-            OutputRectStrategy rectStrategy = new OutputRectStrategy(msg, outputStackInfo);
-            rectStrategy.setStackInfo(stackInfo);
-            return rectStrategy.printMessage();
-        } else {
-            NoRectStrategy noRectStrategy = new NoRectStrategy(msg, outputStackInfo);
-            noRectStrategy.setStackInfo(stackInfo);
-            return noRectStrategy.printMessage();
-        }
+
+        OutPutMessage outPutMessage = outputRect ?
+                new OutputRectStrategy(new LogMessage(stackInfo.toString(), msg)) :
+                new NoRectStrategy(new LogMessage(stackInfo.toString(), msg));
+        return outputStackInfo ?
+                outPutMessage.stackInfo() + outPutMessage.outputMessage() :
+                outPutMessage.outputMessage();
     }
 
 }

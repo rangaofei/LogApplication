@@ -6,26 +6,26 @@ import java.nio.charset.Charset;
  * Created by Administrator on 2017/9/4 0004.
  */
 
-public class NoRectStrategy {
-    private String message;
-    private boolean outputStackInfo;
-    private StringBuilder stackInfo;
+public class NoRectStrategy implements OutPutMessage {
+    private LogMessage logMessage;
 
-    public NoRectStrategy(String message, boolean outputStackInfo) {
-        this.message = message;
-        this.outputStackInfo = outputStackInfo;
+    public NoRectStrategy(LogMessage logMessage) {
+        this.logMessage = logMessage;
     }
 
-    public void setStackInfo(StringBuilder stackInfo) {
-        this.stackInfo = stackInfo;
-    }
-
-    public String printMessage() {
-        if (!outputStackInfo) {
-            stackInfo = new StringBuilder("");
+    @Override
+    public String stackInfo() {
+        if (logMessage == null) {
+            return null;
         }
-        StringBuilder result = new StringBuilder(stackInfo);
-        result.append(message);
-        return result.toString();
+        return logMessage.getStackInfo();
+    }
+
+    @Override
+    public String outputMessage() {
+        if (logMessage == null) {
+            return null;
+        }
+        return logMessage.getMsg();
     }
 }
