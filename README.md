@@ -32,3 +32,23 @@ LogConfig logConfig = new LogConfig.Builder()
 在buildConfig文件中可以根据当前打包版本（debug还是release）来设置是否输出日志
 
 ![](https://github.com/rgf456/LogApplication/blob/master/Thumb/1.png)
+
+### 9月5日更新
+新增实体bean类输出
+只需添加@LogEntity即可
+```
+@LogEntity
+public class UserName {
+    private String user;
+    private String address;
+
+    public UserName(String user, String address) {
+        this.user = user;
+        this.address = address;
+    }
+}
+```
+在方法中调用：
+```
+LogUtil.object(new Student(3,"saka"));
+```
