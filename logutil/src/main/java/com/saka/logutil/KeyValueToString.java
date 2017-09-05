@@ -1,4 +1,4 @@
-package com.sak.logutil;
+package com.saka.logutil;
 
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
@@ -26,7 +26,7 @@ public class KeyValueToString {
         int max = objects.get(0).getName().getBytes(Charset.forName("gbk")).length;
         for (int i = 1; i < objects.size(); i++) {
             if (objects.get(i).getName().getBytes(Charset.forName("gbk")).length > max) {
-                max = objects.get(i).toString().getBytes(Charset.forName("gbk")).length;
+                max = objects.get(i).getName().getBytes(Charset.forName("gbk")).length;
             }
         }
         return max;

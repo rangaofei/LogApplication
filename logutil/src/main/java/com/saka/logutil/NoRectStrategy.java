@@ -1,15 +1,13 @@
-package com.sak.logutil;
-
-import java.nio.charset.Charset;
+package com.saka.logutil;
 
 /**
  * Created by Administrator on 2017/9/4 0004.
  */
 
-public class OutputRectStrategy implements OutPutMessage {
+public class NoRectStrategy implements OutPutMessage {
     private LogMessage logMessage;
 
-    public OutputRectStrategy(LogMessage logMessage) {
+    public NoRectStrategy(LogMessage logMessage) {
         this.logMessage = logMessage;
     }
 
@@ -18,7 +16,7 @@ public class OutputRectStrategy implements OutPutMessage {
         if (logMessage == null) {
             return null;
         }
-        return logMessage.getWrapStackInfo();
+        return logMessage.getStackInfo();
     }
 
     @Override
@@ -26,6 +24,6 @@ public class OutputRectStrategy implements OutPutMessage {
         if (logMessage == null) {
             return null;
         }
-        return logMessage.getWrapMsg();
+        return logMessage.getMsg();
     }
 }

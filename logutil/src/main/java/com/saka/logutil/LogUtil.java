@@ -1,7 +1,5 @@
-package com.sak.logutil;
+package com.saka.logutil;
 
-
-import com.saka.logutil.BuildConfig;
 
 public class LogUtil {
 

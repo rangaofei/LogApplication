@@ -1,6 +1,4 @@
-package com.sak.logutil;
-
-import com.saka.logutil.BuildConfig;
+package com.saka.logutil;
 
 /**
  * Created by Administrator on 2017/9/4 0004.

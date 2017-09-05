@@ -1,4 +1,4 @@
-package com.sak.logutil;
+package com.saka.logutil;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

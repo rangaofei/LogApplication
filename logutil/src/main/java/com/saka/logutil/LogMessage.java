@@ -1,4 +1,4 @@
-package com.sak.logutil;
+package com.saka.logutil;
 
 import java.nio.charset.Charset;
 

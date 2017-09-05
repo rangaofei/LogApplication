@@ -1,4 +1,4 @@
-package com.sak.logutil;
+package com.saka.logutil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -26,6 +26,9 @@ public class AnnotationUtil {
             f.setAccessible(true);
             try {
                 Object val = f.get(o);
+                if (null == val) {
+                    val = "null";
+                }
                 fieldList.add(f);
                 objectList.add(val);
             } catch (IllegalAccessException e) {
