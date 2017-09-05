@@ -52,3 +52,4 @@ public class UserName {
 ```
 LogUtil.object(new Student(3,"saka"));
 ```
+![](https://github.com/rgf456/LogApplication/blob/master/Thumb/2.png)
