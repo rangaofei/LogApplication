@@ -45,11 +45,10 @@ public class UserName {
     public UserName(String user, String address) {
         this.user = user;
         this.address = address;
-    }
-}
+
 ```
 在方法中调用：
 ```
-LogUtil.object(new Student(3,"saka"));
+LogUtil.object(new UserName("saka","123"));
 ```
 ![](https://github.com/rgf456/LogApplication/blob/master/Thumb/2.png)
