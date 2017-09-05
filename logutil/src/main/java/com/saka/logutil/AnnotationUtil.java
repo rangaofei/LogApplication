@@ -1,5 +1,8 @@
 package com.saka.logutil;
 
+import com.saka.logutil.annotations.LogEntity;
+import com.saka.logutil.annotations.LogField;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -22,7 +25,12 @@ public class AnnotationUtil {
 
         Field[] fields = clazz.getDeclaredFields();
         for (Field f : fields) {
-            if (Modifier.isStatic(f.getModifiers())) continue;
+            if (Modifier.isStatic(f.getModifiers())) {
+                LogField logField = f.getAnnotation(LogField.class);
+                if (null == logField) {
+                    continue;
+                }
+            }
             f.setAccessible(true);
             try {
                 Object val = f.get(o);

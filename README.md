@@ -33,7 +33,7 @@ LogConfig logConfig = new LogConfig.Builder()
 
 ![](https://github.com/rgf456/LogApplication/blob/master/Thumb/1.png)
 
-### 9月5日更新
+### 9月5日1.0.8更新
 新增实体bean类输出
 只需添加@LogEntity即可
 ```
@@ -52,3 +52,7 @@ public class UserName {
 LogUtil.object(new UserName("saka","123"));
 ```
 ![](https://github.com/rgf456/LogApplication/blob/master/Thumb/2.png)
+
+### 9月5日1.0.9更新
+
+本日志输出不会输出static域，加上注解`LogField`后即可输出static域。
